@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Pinyin\地名字库.txt" />
+    <None Remove="Pinyin\字库.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pinyin\地名字库.txt" />
+    <Content Include="Pinyin\字库.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+</Project>

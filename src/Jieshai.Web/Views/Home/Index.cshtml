@@ -1,0 +1,104 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>OEM 配置</title>
+    <link href="~/css/webui.css" rel="stylesheet">
+    <script src="~/js/webui.js?v=0.2"></script>
+    <script src="~/js/indexPage.js?v=0.2"></script>
+    <script src="~/js/oemLogModal.js?v=0.2"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div style="text-align:center"><h3>OEM列表</h3></div>
+        <div class="row btn-toolbar">
+            <div class="col-3">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input id="txtKeyword" type="text" style="width:300px" class="form-control">
+                    </div>
+
+                    <button type="submit" id="btnSearch" class="btn btn-default">查询</button>
+                </form>
+            </div>
+            <div class="col-8">
+                <div class="btn-group">
+                    <a id="btnCreate" href="/home/add" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i>添加</a>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div id="datagrid"></div>
+        <div id="datagridPagger"></div>
+    </div>
+
+    <div id="activeCIDialog" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">启动OEM CI</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="oemCIForm" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-label">选择分支</label>
+                            <div class="control-input">
+                                <select name='version' class='form-control webui-simpleSelect' data-empty-message="请选择">
+                                    <option value="5.9.1.0">5.9.1.0</option>
+                                    <option value="5.9.0.0">5.9.0.0</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">构建任务</label>
+                            <div class="control-input">
+                                <div name='jobs' class='webui-checkboxList' data-required="true"
+                                     data-required-message="CheckboxList Required" data-default-value='["1", "2", "3", "4"]'
+                                     data-source="[{value: '1', text: 'VDrive'}, {value: '2', text: '客户端'}, {value: '3', text: '云附件'}, {value: '4', text: '移动端'}]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button id="btnActiveCI" type="button" class="btn btn-primary">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ciLogsDialog" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="width: 1200px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">OEM CI 日志</h4>
+                </div>
+                <div class="modal-body" style="max-height: 700px; overflow: auto;">
+                    <div id="oemLogDataGrid">
+
+                    </div>
+                    <div id="oemLogDataGridPagger"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+
+    $(function () {
+        $("body").indexPage();
+    })
+</script>
