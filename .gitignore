@@ -1,6 +1,5 @@
 .yarn-integrity
 yarn.lock
-*.cache
 *.il
 *.exp
 *.lib
