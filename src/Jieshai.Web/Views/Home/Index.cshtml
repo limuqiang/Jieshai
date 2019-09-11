@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <title>OEM 配置</title>
+    <title>结算系统</title>
     <link href="~/css/webui.css" rel="stylesheet">
     <script src="~/js/webui.js?v=0.2"></script>
     <script src="~/js/indexPage.js?v=0.2"></script>
@@ -15,23 +15,35 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div style="text-align:center"><h3>OEM列表</h3></div>
-        <div class="row btn-toolbar">
-            <div class="col-3">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <input id="txtKeyword" type="text" style="width:300px" class="form-control">
-                    </div>
+        <div style="text-align:center"><h3>收益列表</h3></div>
+			<form id="searchForm" class="form-horizontal">
+				<div class="row btn-toolbar">
+					<div class="col-3">
+						<div class="form-group">
+							<label  class="control-label">投资人</label>
+							<div class="control-input">
+								<input name='investorName' type='text' class='form-control webui-textbox' />
+							</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="form-group">
+							<label  class="control-label">收益日期</label>
+							<div class="control-input">
+								<div name='incomeDateRange' data-required="true" class='input-group webui-dateTimeRangeInput'>
+									<input class="form-control" type='text'/>
+									<span class="input-group-addon"  >到</span>
+									<input class="form-control" type='text'  />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-1">
+						<button type="submit" id="btnSearch" class="btn btn-default">查询</button>
+					</div>
+				</div>
 
-                    <button type="submit" id="btnSearch" class="btn btn-default">查询</button>
-                </form>
-            </div>
-            <div class="col-8">
-                <div class="btn-group">
-                    <a id="btnCreate" href="/home/add" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i>添加</a>
-                </div>
-            </div>
-        </div>
+			</form>
 
         <br />
         <div id="datagrid"></div>

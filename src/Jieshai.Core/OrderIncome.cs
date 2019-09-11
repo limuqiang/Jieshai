@@ -10,6 +10,10 @@ namespace Jieshai.Core
 
         public float Money { set; get; }
 
+        public int ToadyQuantity { set; get; }
+
+        public int TotalQuantity { set; get; }
+
         public DateTime IncomeDate { set; get; }
     }
 }

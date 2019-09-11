@@ -43,11 +43,14 @@ namespace Jieshai.Core
             while (incomeDate <= this._endDate)
             {
                 var orderTotalQuantity = this._jieshaiManager.OrderManager.GetOrderQuantity(investment, investment.InvestDate, incomeDate);
+                var toadyTotalQuantity = this._jieshaiManager.OrderManager.GetOrderQuantity(investment, incomeDate);
 
-                if(orderTotalQuantity > 0)
+                if (orderTotalQuantity > 0)
                 {
                     OrderIncome orderIncome = new OrderIncome();
                     orderIncome.Money = this.CalculateTodayOrderIncomeMoney(orderTotalQuantity);
+                    orderIncome.ToadyQuantity = toadyTotalQuantity;
+                    orderIncome.TotalQuantity = orderTotalQuantity;
                     orderIncome.IncomeDate = incomeDate;
                     orderIncome.Investment = investment;
 

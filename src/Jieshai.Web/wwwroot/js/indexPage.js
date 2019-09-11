@@ -7,62 +7,34 @@
             _create: function(){
                 var thiz = this;
 
-                $("#oemCIForm").horizontalForm();
-                this._oemCIForm = $("#oemCIForm").form().data("form");
+                $("#searchForm").horizontalForm();
+                this._searchForm = $("#searchForm").form().data("form");
                 
                 this._oemGrid = $("#datagrid").datagrid({
                     columns: [
                         {
-                            title: "代理商", width: "100%", field: "companyFullNameZhcn", render: function (row, args) {
-                                return "<a href='/home/edit?id=" + args.data.id + "'>" + args.value + "</a>";
-                            }
+                            title: "投资人", width: 150, field: "investorName"
                         },
                         {
-                            title: "状态", width: 80, field: "ciStatus", render: function (row, args) {
-                                if (args.value == 1) {
-                                    return "运行中";
-                                }
-                                else if (args.value == 2) {
-                                    return "完成";
-                                }
-                                else if (args.value == 3) {
-                                    return "失败";
-                                }
-
-                                return "";
-                            }
+                            title: "收益日期", width: 150, field: "incomeDate", render: $.webui.__renders.date
                         },
                         {
-                            title: "操作", width: 250, field: "id", render: function (row, args) {
-                                var el = $("<div ></div>");
-                                var activeCIEl = $("<a href='#' class='activeCI' style='margin-right: 10px;display:inline-block'>启动CI</a>")
-                                    .click(function () {
-                                        thiz.activeCI(args.data);
-                                        return false;
-                                    });
-
-                                var editEl = $("<a href='#' style='margin-right: 10px;display:inline-block'>编辑</a>")
-                                    .attr("href", "/home/edit?id=" + args.data.id);
-
-                                var deleteEl = $("<a href='#' style='margin-right: 10px;display:inline-block'>删除</a>")
-                                    .click(function () {
-                                        thiz.deleteOem(args.data);
-                                        return false;
-                                    });
-                                
-                                var oemLogEl = $("<a href='#' class='oem-log'>oem日志</a>")
-                                    .click(function () {
-                                        thiz._ciLogsDialog.showCILogs(args.data);
-                                        return false;
-                                    });
-
-                                el.append(activeCIEl)
-                                    .append(editEl)
-                                    .append(deleteEl)
-                                    .append(oemLogEl)
-
-                                return el;
-                            }
+                            title: "投资账期", width: 150, field: "invertmentName"
+                        },
+                        {
+                            title: "静态收益", width: 150, field: "fixIncomeMoney", render: $.webui.__renders.money
+                        },
+                        {
+                            title: "当日成交单数", width: 150, field: "toadyQuantity"
+                        },
+                        {
+                            title: "总成交单数", width: 150, field: "totalQuantity"
+                        },
+                        {
+                            title: "服务收益", width: 150, field: "orderIncomeMoney", render: $.webui.__renders.money
+                        },
+                        {
+                            title: "总收益", width: 150, field: "totalIncomeMoney", render: $.webui.__renders.money
                         }
                     ],
                     singleSelect: true,
@@ -79,8 +51,8 @@
                     })
                     .data("pagination");
 
-                $("#btnSearch").click(function(){
-                    thiz._searchInfo.keyword = $("#txtKeyword").val();
+                $("#btnSearch").click(function () {
+                    thiz._searchInfo = thiz._searchForm.getValue();
                     thiz._searchInfo.start = 0;
 
                     thiz.search(thiz._searchInfo);
@@ -113,8 +85,8 @@
             search: function(model){
                 var thiz = this;
                 this._searchInfo = model;
-                $.get("home/getOemList", model, function (model) {
-                    thiz._oemGrid.setValue(model.oems);
+                $.get("home/getIncomeList", model, function (model) {
+                    thiz._oemGrid.setValue(model.incomes);
                     thiz._datagridPagger.setPageInfo({
                         start: model.start,
                         count: model.total

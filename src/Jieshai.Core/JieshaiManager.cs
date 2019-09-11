@@ -42,11 +42,11 @@ namespace Jieshai.Core
         public void LoadInvestment()
         {
             var zhangshan = this.InvestorManager.GetById(1);
-            this.InvestmentManager.Add(new Investment { Id = 1, Amount = 30000, InvestDate = DateTime.Today.AddDays(-80), Investor = zhangshan });
-            this.InvestmentManager.Add(new Investment { Id = 2, Amount = 40000, InvestDate = DateTime.Today.AddDays(-60), Investor = zhangshan });
+            this.InvestmentManager.Add(new Investment { Id = 1, Name = "一期", Amount = 30000, InvestDate = DateTime.Today.AddDays(-80), Investor = zhangshan });
+            this.InvestmentManager.Add(new Investment { Id = 2, Name = "二期", Amount = 40000, InvestDate = DateTime.Today.AddDays(-60), Investor = zhangshan });
 
             var lisi = this.InvestorManager.GetById(2);
-            this.InvestmentManager.Add(new Investment { Id = 3, Amount = 50000, InvestDate = DateTime.Today.AddDays(-60), Investor = lisi });
+            this.InvestmentManager.Add(new Investment { Id = 3, Name = "一期", Amount = 50000, InvestDate = DateTime.Today.AddDays(-60), Investor = lisi });
         }
 
         public void LoadOrder()
