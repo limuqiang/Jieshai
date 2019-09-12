@@ -14,13 +14,13 @@ namespace Jieshai
 
         public DateTimeRange(DateTime? start, DateTime? end)
         {
-            this.start = start;
-            this.end = end;
+            this.Start = start;
+            this.End = end;
         }
 
-        public DateTime? start { set; get; }
+        public DateTime? Start { set; get; }
 
-        public DateTime? end { set; get; }
+        public DateTime? End { set; get; }
 
         public bool InRange(DateTime? date)
         {
@@ -29,23 +29,23 @@ namespace Jieshai
                 return false;
             }
 
-            if (this.end.HasValue && this.start.HasValue)
+            if (this.End.HasValue && this.Start.HasValue)
             {
-                if (date.Value < start.Value || date.Value > this.end.Value)
+                if (date.Value < Start.Value || date.Value > this.End.Value)
                 {
                     return false;
                 }
             }
-            else if (this.end.HasValue)
+            else if (this.End.HasValue)
             {
-                if (date.Value > this.end.Value)
+                if (date.Value > this.End.Value)
                 {
                     return false;
                 }
             }
-            else if (this.start.HasValue)
+            else if (this.Start.HasValue)
             {
-                if (date.Value < start.Value)
+                if (date.Value < Start.Value)
                 {
                     return false;
                 }
@@ -55,11 +55,11 @@ namespace Jieshai
 
         public bool InRange(DateTimeRange range)
         {
-            if (this.InRange(range.start))
+            if (this.InRange(range.Start))
             {
                 return true;
             }
-            if (this.InRange(range.end))
+            if (this.InRange(range.End))
             {
                 return true;
             }
@@ -68,17 +68,17 @@ namespace Jieshai
 
         public override string ToString()
         {
-            if (this.start.HasValue && this.end.HasValue)
+            if (this.Start.HasValue && this.End.HasValue)
             {
-                return string.Format("{0}到{1}", this.start.Value.ToString("yyyy-MM-dd HH:mm"), this.end.Value.ToString("yyyy-MM-dd HH:mm"));
+                return string.Format("{0}到{1}", this.Start.Value.ToString("yyyy-MM-dd HH:mm"), this.End.Value.ToString("yyyy-MM-dd HH:mm"));
             }
-            else if (this.start.HasValue)
+            else if (this.Start.HasValue)
             {
-                return string.Format("{0}以后", this.start.Value.ToString("yyyy-MM-dd HH:mm"));
+                return string.Format("{0}以后", this.Start.Value.ToString("yyyy-MM-dd HH:mm"));
             }
-            else if (this.end.HasValue)
+            else if (this.End.HasValue)
             {
-                return string.Format("{0}以前", this.end.Value.ToString("yyyy-MM-dd HH:mm"));
+                return string.Format("{0}以前", this.End.Value.ToString("yyyy-MM-dd HH:mm"));
             }
             return "";
         }

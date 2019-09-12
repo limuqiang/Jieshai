@@ -18,6 +18,7 @@ namespace Jieshai.Core
             this.InvestorManager = new InvestorManager();
             this.InvestmentManager = new InvestmentManager();
             this.OrderManager = new OrderManager();
+            this.IncomeManager = new IncomeManager(this);
         }
 
         public InvestorManager InvestorManager { set; get; }
@@ -25,6 +26,8 @@ namespace Jieshai.Core
         public InvestmentManager InvestmentManager { set; get; }
 
         public OrderManager OrderManager { set; get; }
+
+        public IncomeManager IncomeManager { set; get; }
 
         public void Load()
         {

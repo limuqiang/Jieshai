@@ -85,13 +85,19 @@
             search: function(model){
                 var thiz = this;
                 this._searchInfo = model;
-                $.get("home/getIncomeList", model, function (model) {
-                    thiz._oemGrid.setValue(model.incomes);
-                    thiz._datagridPagger.setPageInfo({
-                        start: model.start,
-                        count: model.total
-                    });
-                })
+                $.ajax({
+                    type: "POST",
+                    url: "home/getIncomeList",
+                    data: model,
+                    dataType: "json",
+                    contentType: "application/x-www-form-urlencoded", 
+                    success: function (model) {
+                        thiz._oemGrid.setValue(model.incomes);
+                        thiz._datagridPagger.setPageInfo({
+                            start: model.start,
+                            count: model.total
+                        });
+                });
             },
             activeCI: function(oemInfo){
                 this._activeCIDialog.show();

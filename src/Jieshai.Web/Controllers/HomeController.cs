@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Jieshai.Web.Models;
 using Jieshai.Core;
+using Jieshaincome.Web.Models;
 
 namespace Jieshai.Web.Controllers
 {
@@ -20,15 +21,12 @@ namespace Jieshai.Web.Controllers
         [HttpGet]
         public IActionResult GetIncomeList(IncomeSeachModel searchModel)
         {
-
-            OrderIncomeCalculator orderIncomeCalculator = 
-                new OrderIncomeCalculator(JieshaiManager.Instace, searchModel.IncomeDateRange.start.Value, searchModel.IncomeDateRange.end.Value);
-
-            var incomes = orderIncomeCalculator.Calculate();
+            
+            IncomeCalculateArgs incomeCalculateArgs = ObjectMapperHelper.Map<IncomeCalculateArgs>(searchModel);
+            var incomes = JieshaiManager.Instace.IncomeManager.CalculateIncome(incomeCalculateArgs);
 
             var incomeModels = incomes
-                .Select(i => new IncomeViewModel { IncomeDate = i.IncomeDate, InvestorName = i.Investment.Investor.Name, InvertmentName = i.Investment.Name,
-                    OrderIncomeMoney = i.Money, ToadyQuantity = i.ToadyQuantity, TotalQuantity = i.TotalQuantity });
+                .Select(i => ObjectMapperHelper.Map<IncomeViewModel>(i));
 
             return Json(new { incomes = incomeModels });
         }
@@ -37,6 +35,7 @@ namespace Jieshai.Web.Controllers
         {
             return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

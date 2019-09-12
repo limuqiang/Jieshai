@@ -23,18 +23,17 @@ namespace Jieshai.Tests
             jieshaiManager.OrderManager.Add(new Order { Id = 3, Investment = jieshaiManager.InvestmentManager.GetById(1), Quantity = 50, ReceivingDate = DateTime.Today.AddDays(-27) });
             jieshaiManager.OrderManager.Add(new Order { Id = 4, Investment = jieshaiManager.InvestmentManager.GetById(1), Quantity = 50, ReceivingDate = DateTime.Today.AddDays(-26) });
 
-            OrderIncomeCalculator orderIncomeCalculator = new OrderIncomeCalculator(jieshaiManager, DateTime.Today.AddDays(-30), DateTime.Today.AddDays(-30));
-            var orderIncomes = orderIncomeCalculator.Calculate();
+            
+            var orderIncomes = jieshaiManager.IncomeManager.CalculateIncome(new IncomeCalculateArgs { IncomeDateRange = new DateTimeRange(DateTime.Today.AddDays(-30), DateTime.Today.AddDays(-30)) });
 
             Assert.Equal(0, orderIncomes.Count);
 
-            orderIncomeCalculator = new OrderIncomeCalculator(jieshaiManager, DateTime.Today.AddDays(-30), DateTime.Today.AddDays(-27));
-            orderIncomes = orderIncomeCalculator.Calculate();
+            orderIncomes = jieshaiManager.IncomeManager.CalculateIncome(new IncomeCalculateArgs { IncomeDateRange = new DateTimeRange(DateTime.Today.AddDays(-30), DateTime.Today.AddDays(-27)) });
 
             Assert.Equal(3, orderIncomes.Count);
-            Assert.Equal(1200, orderIncomes[0].Money);
-            Assert.Equal(1200 + 1500, orderIncomes[1].Money);
-            Assert.Equal(1200 + 1500 + 2000, orderIncomes[2].Money);
+            Assert.Equal(1200, orderIncomes[0].OrderIncomeMoney);
+            Assert.Equal(1200 + 1500, orderIncomes[1].OrderIncomeMoney);
+            Assert.Equal(1200 + 1500 + 2000, orderIncomes[2].OrderIncomeMoney);
         }
 
         [Fact]
@@ -42,7 +41,7 @@ namespace Jieshai.Tests
         {
             JieshaiManager jieshaiManager = new JieshaiManager();
 
-            OrderIncomeCalculator orderIncomeCalculator = new OrderIncomeCalculator(jieshaiManager, DateTime.Today.AddDays(-30), DateTime.Today.AddDays(-30));
+            IncomeCalculator orderIncomeCalculator = new IncomeCalculator(null, null);
             var money1 = orderIncomeCalculator.CalculateTodayOrderIncomeMoney(99);
             Assert.Equal((99 -10) * 30, money1);
 

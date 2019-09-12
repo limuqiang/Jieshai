@@ -29,5 +29,10 @@ namespace Jieshai.Core
         {
             return this.Where(o => o.Investment == investment && o.ReceivingDate == date);
         }
+
+        public List<Order> GetOrders(Investment investment, DateTimeRange dateRange)
+        {
+            return this.Where(o => o.Investment == investment && dateRange.InRange(o.ReceivingDate));
+        }
     }
 }
