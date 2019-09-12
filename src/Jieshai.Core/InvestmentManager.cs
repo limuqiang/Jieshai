@@ -19,5 +19,28 @@ namespace Jieshai.Core
 
             return investments.OrderBy(i => i.InvestDate).FirstOrDefault();
         }
+
+        public Investment Create(InvestmentCreateInfo createInfo)
+        {
+            if (createInfo.Name == null)
+            {
+                throw new ArgumentNullException("createInfo.Name");
+            }
+            if (createInfo.Investor == null)
+            {
+                throw new ArgumentNullException("createInfo.Investor");
+            }
+
+            Investment investment = new Investment();
+            investment.Id = this.CacheList.Max(i => i.Id) + 1;
+            investment.Name = createInfo.Name;
+            investment.Money = createInfo.Money;
+            investment.InvestDate = createInfo.InvestDate;
+            investment.Remark = createInfo.Remark;
+
+            this.Add(investment);
+
+            return investment;
+        }
     }
 }

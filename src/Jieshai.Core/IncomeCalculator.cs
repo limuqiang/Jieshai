@@ -83,7 +83,7 @@ namespace Jieshai.Core
 
         public float CalculateInvestmentIncomeMoney()
         {
-            return (float)(this._investment.Amount * 0.03);
+            return (float)(this._investment.Money * 0.03);
         }
     }
 }

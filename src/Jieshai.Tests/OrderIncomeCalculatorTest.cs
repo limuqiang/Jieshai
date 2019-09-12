@@ -14,9 +14,9 @@ namespace Jieshai.Tests
 
             jieshaiManager.InvestorManager.Add(new Investor { Id = 1, Name = "张三" });
             jieshaiManager.InvestorManager.Add(new Investor { Id = 2, Name = "李四" });
-            jieshaiManager.InvestmentManager.Add(new Investment { Id = 1, Amount = 30000, InvestDate = DateTime.Today.AddDays(-30), Investor = jieshaiManager.InvestorManager.GetById(1) });
-            jieshaiManager.InvestmentManager.Add(new Investment { Id = 2, Amount = 40000, InvestDate = DateTime.Today.AddDays(-28), Investor = jieshaiManager.InvestorManager.GetById(1) });
-            jieshaiManager.InvestmentManager.Add(new Investment { Id = 3, Amount = 50000, InvestDate = DateTime.Today.AddDays(-26), Investor = jieshaiManager.InvestorManager.GetById(2) });
+            jieshaiManager.InvestmentManager.Add(new Investment { Id = 1, Money = 30000, InvestDate = DateTime.Today.AddDays(-30), Investor = jieshaiManager.InvestorManager.GetById(1) });
+            jieshaiManager.InvestmentManager.Add(new Investment { Id = 2, Money = 40000, InvestDate = DateTime.Today.AddDays(-28), Investor = jieshaiManager.InvestorManager.GetById(1) });
+            jieshaiManager.InvestmentManager.Add(new Investment { Id = 3, Money = 50000, InvestDate = DateTime.Today.AddDays(-26), Investor = jieshaiManager.InvestorManager.GetById(2) });
             jieshaiManager.OrderManager.Add(new Order { Id = 1, Investment = jieshaiManager.InvestmentManager.GetById(1), Quantity = 50, ReceivingDate = DateTime.Today.AddDays(-29)  });
             jieshaiManager.OrderManager.Add(new Order { Id = 2, Investment = jieshaiManager.InvestmentManager.GetById(1), Quantity = 50, ReceivingDate = DateTime.Today.AddDays(-28) });
             jieshaiManager.OrderManager.Add(new Order { Id = 7, Investment = jieshaiManager.InvestmentManager.GetById(3), Quantity = 50, ReceivingDate = DateTime.Today.AddDays(-28) });

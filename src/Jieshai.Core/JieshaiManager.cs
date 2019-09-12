@@ -15,11 +15,13 @@ namespace Jieshai.Core
 
         public JieshaiManager()
         {
+            this.UserManager = new UserManager();
             this.InvestorManager = new InvestorManager();
             this.InvestmentManager = new InvestmentManager();
-            this.OrderManager = new OrderManager();
+            this.OrderManager = new OrderManager(this);
             this.IncomeManager = new IncomeManager(this);
         }
+        public UserManager UserManager { set; get; }
 
         public InvestorManager InvestorManager { set; get; }
 
@@ -31,9 +33,15 @@ namespace Jieshai.Core
 
         public void Load()
         {
+            this.LoadUser();
             this.LoadInvestor();
             this.LoadInvestment();
             this.LoadOrder();
+        }
+
+        public void LoadUser()
+        {
+            this.UserManager.Add(new User { Id = 1, Name = "Administrator", Account = "admin", Password = "123456" });
         }
 
         public void LoadInvestor()
@@ -45,11 +53,11 @@ namespace Jieshai.Core
         public void LoadInvestment()
         {
             var zhangshan = this.InvestorManager.GetById(1);
-            this.InvestmentManager.Add(new Investment { Id = 1, Name = "一期", Amount = 30000, InvestDate = DateTime.Today.AddDays(-80), Investor = zhangshan });
-            this.InvestmentManager.Add(new Investment { Id = 2, Name = "二期", Amount = 40000, InvestDate = DateTime.Today.AddDays(-60), Investor = zhangshan });
+            this.InvestmentManager.Add(new Investment { Id = 1, Name = "一期", Money = 30000, InvestDate = DateTime.Today.AddDays(-80), Investor = zhangshan });
+            this.InvestmentManager.Add(new Investment { Id = 2, Name = "二期", Money = 40000, InvestDate = DateTime.Today.AddDays(-60), Investor = zhangshan });
 
             var lisi = this.InvestorManager.GetById(2);
-            this.InvestmentManager.Add(new Investment { Id = 3, Name = "一期", Amount = 50000, InvestDate = DateTime.Today.AddDays(-60), Investor = lisi });
+            this.InvestmentManager.Add(new Investment { Id = 3, Name = "一期", Money = 50000, InvestDate = DateTime.Today.AddDays(-60), Investor = lisi });
         }
 
         public void LoadOrder()

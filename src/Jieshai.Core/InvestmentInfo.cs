@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Jieshai.Core
 {
-    public class Investment: IIdProvider
+    public class InvestmentCreateInfo
     {
-        public int Id { set; get; }
-
         public string Name { set; get; }
 
         public Investor Investor { set; get; }
