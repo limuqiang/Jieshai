@@ -53,7 +53,7 @@ namespace Jieshai.Web
         {
             List<string> skipUrls = new List<string>()
             {
-                "/api/user/login"
+                "/login"
             };
             url = url.ToLowerInvariant();
             return skipUrls.Any(p => url.IndexOf(p)==0);

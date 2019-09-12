@@ -23,5 +23,6 @@ namespace Jieshai.Core
 
             return investor;
         }
+
     }
 }
